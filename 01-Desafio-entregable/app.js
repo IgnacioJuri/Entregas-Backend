@@ -14,12 +14,16 @@ class ProductManager{
             stock,
         };
         if(!title || !description || !price || !thumbnail || !code || !stock){
-            console.log("Todos los campos deben ser completados");
+            //CORRECCION
+            // console.log("Todos los campos deben ser completados");
+            console.error("Todos los campos deben ser completados");
             return;
         }
 
         if(this.products.find(product => product.code === code)){
-            console.log(`El producto con este codigo: ${code} , ya existe`);
+            //CORRECCION
+            // console.log(`El producto con este codigo: ${code} , ya existe`);
+            console.error(`El producto con este codigo: ${code} , ya existe`);
             return;
         }else{
             this.products.push(producto); 
@@ -39,8 +43,15 @@ class ProductManager{
     }
 
     getProductById(IdProduct){
-        return this.products.find(product => product.id === IdProduct)
-    }
+        //CORRECCION
+        // return this.products.find(product => product.id === IdProduct)
+        const productById =  this.products.find(product => product.id === IdProduct)
+        if(productById === undefined){
+            return console.error(`No existe ningun producto con Id ${IdProduct}`);
+        }else{
+            return productById;
+        }
+    };
 };
 
 const productManager = new ProductManager();
@@ -59,7 +70,3 @@ console.log(productManager.getProductById(2));
 console.log("Este es un error por que dos productos tienen el mismo Code");
 productManager.addProduct("Banan", "Banana de Ecuador", 1200, "./img/banana/bananaecuador.jpg", 9856, 8);
 console.log(productManager.getProducts());
-
-
-
-

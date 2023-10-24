@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "title": "PRODUCTO 1",
+        "description": "asdasasd",
+        "price": 25,
+        "thumbnail": "algo.jpg",
+        "code": 5,
+        "stock": 2
+    },
+    {
+        "id": 2,
+        "title": "PRODUCTO 2",
+        "description": "asdasasd",
+        "price": 25,
+        "thumbnail": "algo.jpg",
+        "code": 25,
+        "stock": 2
+    },
+    {
+        "id": 3,
+        "title": "PRODUCTO 3",
+        "description": "asdasasd",
+        "price": 25,
+        "thumbnail": "algo.jpg",
+        "code": 8,
+        "stock": 2
+    },
+    {
+        "id": 4,
+        "title": "PRODUCTO 4",
+        "description": "asdasasd",
+        "price": 25,
+        "thumbnail": "algo.jpg",
+        "code": 3,
+        "stock": 2
+    },
+    {
+        "id": 5,
+        "title": "PRODUCTO 5",
+        "description": "asdasasd",
+        "price": 25,
+        "thumbnail": "algo.jpg",
+        "code": 78,
+        "stock": 2
+    },
+    {
+        "id": 6,
+        "title": "PRODUCTO 6",
+        "description": "asdasasd",
+        "price": 25,
+        "thumbnail": "algo.jpg",
+        "code": 24,
+        "stock": 2
+    },
+    {
+        "id": 7,
+        "title": "PRODUCTO 7",
+        "description": "asdasasd",
+        "price": 25,
+        "thumbnail": "algo.jpg",
+        "code": 9,
+        "stock": 2
+    },
+    {
+        "id": 8,
+        "title": "PRODUCTO 8",
+        "description": "asdasasd",
+        "price": 25,
+        "thumbnail": "algo.jpg",
+        "code": 22,
+        "stock": 2
+    },
+    {
+        "id": 9,
+        "title": "PRODUCTO 9",
+        "description": "asdasasd",
+        "price": 25,
+        "thumbnail": "algo.jpg",
+        "code": 18,
+        "stock": 2
+    },
+    {
+        "id": 10,
+        "title": "PRODUCTO 10",
+        "description": "asdasasd",
+        "price": 25,
+        "thumbnail": "algo.jpg",
+        "code": 55,
+        "stock": 2
+    }
+]

@@ -1,12 +1,8 @@
-const { log } = require('console');
-const fs = require('fs');
 
-class ProductManager {
-    //CORRECCION
-    //constructor(){
+import fs from 'fs';
+
+export class ProductManager {
     constructor(path){
-        //CORRECCION
-        //this.path = "./productos.json";
         this.path = path;
         this.lastId = 0;
     };
@@ -26,8 +22,6 @@ class ProductManager {
             console.error(error);
         }
     };
-    //CORRECCION
-    //async addProducts(product){
     async createProduct(product){
 
         try {
@@ -39,8 +33,6 @@ class ProductManager {
             console.error(error);
         }
     };
-    //CORRECCION
-    //async createProduct (title, description, price, thumbnail, code, stock){
     async addProduct  (title, description, price, thumbnail, code, stock){
         const product = {
             id: this.#getUniqueId(),
@@ -112,15 +104,11 @@ class ProductManager {
     };
 };
 
-
-
-// CORRECCION
-//const productManager = new ProductManager();
 const productManager = new ProductManager("./Productos.json");
 
 const test = async() => {
-    await productManager.addProduct("PRODUCTO 1", "asdasasd", 25, "algo.jpg", 5, 2);
-    await productManager.addProduct("PRODUCTO 2", "asdasasd", 25, "algo.jpg", 25, 2);
 };
 
 test();
+
+
