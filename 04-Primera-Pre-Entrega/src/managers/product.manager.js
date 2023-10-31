@@ -36,24 +36,23 @@ export class ProductManager {
     async addProduct  (title, description, price, thumbnail, code, stock){
         const product = {
             id: this.#getUniqueId(),
+            status: true,
             title,
             description,
             price,
             thumbnail,
             code,
-            stock
+            stock,
         };
 
-        if(!title || !description || !price || !thumbnail || !code || !stock){
-            console.error("Todos los campos deben ser completados");
-            return;
-        }
+        // if(!title || !description || !price || !thumbnail || !code || !stock){
+        //     throw new Error("Todos los campos deben ser completados");
+        // }
 
         const products = await this.getProducts();
         
         if(products.find(prod => prod.code === code)){
-            console.error(`El producto con este codigo: ${code} , ya existe`);
-            return;
+            throw new Error(`El producto con este codigo: ${code} , ya existe`);
         } else {
             await this.createProduct(product);
         };
@@ -107,6 +106,7 @@ export class ProductManager {
 const productManager = new ProductManager("./Productos.json");
 
 const test = async() => {
+    
 };
 
 test();

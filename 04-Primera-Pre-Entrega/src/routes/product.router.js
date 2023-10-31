@@ -2,14 +2,14 @@ import { Router } from 'express';
 import { ProductManager } from '../managers/product.manager.js';
 import { productValidator } from '../middlewares/product.validator.js';
 const router = Router();
-const productManager = new ProductManager("./src/data/products.json");
+const productManager = new ProductManager("./src/data/Productos.json");
 
 
 router.get('/' , async (req,res) =>{
 
     try {
         const products = await productManager.getProducts();
-       
+        const {limit} = req.query;
         if(limit){
             res.status(200).json(products.slice(0, parseInt(limit)));
         }else{
@@ -36,11 +36,11 @@ router.get('/:pid', async (req, res) => {
 router.post('/', productValidator, async (req,res) => {
 
     try {
-        const createProduct = await productManager.createProduct(req.body);
-        res.status(200).json(createProduct);
-    } catch (error) {
-        res.status(500).json({error: error.message});
-    }
+        const productCreated = await productManager.addProduct(req.body);
+        res.status(200).json(productCreated);
+      } catch (error) {
+        res.status(500).json(error.message);
+      }
 });
 
 router.put('/:pid' , async (req,res) => {
@@ -52,7 +52,7 @@ router.put('/:pid' , async (req,res) => {
         if(!productById){
             res.status(404).json({ error: "product not found" })
         }else{
-            await productManager.updateProduct(pid, product); // Aquí está la corrección
+            await productManager.updateProduct(pid, product); 
             res.status(200).json({ message: "product updated"});
         }
     } catch (error) {
