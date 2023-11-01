@@ -32,7 +32,7 @@ export class CartManager {
     async newCart(){
 
         const cart = {
-            id: this.#getUniqueId(),
+            id: this.getUniqueId(),
             products: []
         };
 
@@ -40,7 +40,7 @@ export class CartManager {
         return;
     };
 
-    #getUniqueId(){
+    getUniqueId(){
         this.lastId++; 
         return this.lastId; 
     };
@@ -58,21 +58,28 @@ export class CartManager {
 
       async saveProductToCart(idCart, idProd){
         const carts = await this.getCart();
-        const cartExists = await this.getCartById(idCart);
-        if(cartExists){
-            const existProdInCart = cartExists.products.find(product => product.id === idProd);
-            if(existProdInCart) existProdInCart.quantity += 1
+        const cartIndex = carts.findIndex(cart => cart.id === idCart);
+        if(cartIndex !== -1){
+            const existProdInCart = carts[cartIndex].products.find(prod => prod.product === idProd);
+            if(existProdInCart){
+                existProdInCart.quantity += 1
+            }
             else {
                 const prod = {
                     product: idProd,
                     quantity: 1
                 };
-                cartExists.products.push(prod);
+                
+                carts[cartIndex].products.push(prod);
             }
             await fs.promises.writeFile(this.path, JSON.stringify(carts));
-            return cartExists;
+            return carts;
+        }else{
+            throw new Error(`No existe ningun Cart con el Id ${idCart}`);
         }
-      }
+    }
+    
+    
 
 };
 
