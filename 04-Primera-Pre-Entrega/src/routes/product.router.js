@@ -43,22 +43,19 @@ router.post('/', productValidator, async (req,res) => {
       }
 });
 
-router.put('/:pid' , async (req,res) => {
-    
-    const { pid } = req.params;
-    const product = {... req.body};
-    const productById = await productManager.getProductById(Number(pid));   
+router.put("/:id", async (req, res) => {
     try {
-        if(!productById){
-            res.status(404).json({ error: "product not found" })
-        }else{
-            await productManager.updateProduct(pid, product); 
-            res.status(200).json({ message: "product updated"});
-        }
+      const product = { ...req.body };
+      const { id } = req.params;
+      const idNumber = Number(id);
+      const productOk = await productManager.getProductById(idNumber);
+      if (!productOk) res.status(404).json({ message: "product not found" });
+      else await productManager.updateProduct(product, idNumber);
+      res.status(200).json({ message: `product id: ${id} updated` });
     } catch (error) {
-        res.status(500).json(error.message);
+      res.status(500).json(error.message);
     }
-});
+  });
 
 
 router.delete('/:pid', async (req,res) => {

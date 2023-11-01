@@ -33,7 +33,10 @@ export class ProductManager {
             throw new Error('Error al crear un nuevo producto');
         }
     };
-    async addProduct  (title, description, price, thumbnail, code, stock){
+    async addProduct  (ProductObject){
+
+        const { title, description, price, thumbnail, code, stock } = ProductObject;
+
         const product = {
             id: this.#getUniqueId(),
             status: true,
@@ -44,10 +47,6 @@ export class ProductManager {
             code,
             stock,
         };
-
-        // if(!title || !description || !price || !thumbnail || !code || !stock){
-        //     throw new Error("Todos los campos deben ser completados");
-        // }
 
         const products = await this.getProducts();
         
@@ -87,26 +86,27 @@ export class ProductManager {
         }
     };
 
-    async updateProduct(id, updatedFields) {
+    async updateProduct(obj, id){
         try {
-            const products = await this.getProducts();
-            const productIndex = products.findIndex(product => product.id === id);
-            if (productIndex !== -1) {
-                updatedFields.id = id;
-                products[productIndex] = updatedFields;
-                await fs.promises.writeFile(this.path, JSON.stringify(products));
-                console.log("Producto actualizado correctamente.");
-            };
+            const products = await this.getProducts();    // [{},{}]
+            const index = products.findIndex(prod => prod.id === id);  // posición ó -1
+            if(index === -1) return false;
+            else{
+                const prodUpdt = { ...obj, id };
+                products[index] = prodUpdt;
+            }
+            await fs.promises.writeFile(this.path, JSON.stringify(products));
         } catch (error) {
-            throw new Error("Error al actualizar el producto:", error);
-        };
-    };
+            throw new Error(`Error al modificar el producto con el id ${id}`);
+        }
+      }
 };
 
 const productManager = new ProductManager("./Productos.json");
 
 const test = async() => {
-    
+    console.log();  
 };
+
 
 test();
